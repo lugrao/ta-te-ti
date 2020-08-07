@@ -43,7 +43,7 @@ def elegir_casillero(jugador):
             f'\n  > Jugador {jugador["Número"]}, elegí un casillero del 1 al 9, for favor: ')
         if eleccion.isdigit():
             if int(eleccion) in range(1, 10):
-                if casilleros[eleccion] == "X" or casilleros[eleccion] == "O":
+                if casilleros[eleccion] != " ":
                     print(
                         "\n  > Ese casillero ya está ocupado, es mejor para todos si elegís otro.")
                     eleccion = ""
