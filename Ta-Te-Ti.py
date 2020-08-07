@@ -58,7 +58,17 @@ def elegir_casillero(jugador):
 
 
 def mostrar_tablero(casilleros):
-    print("\n"*100)
+    print("\n")
+    print("  #############################################################")
+    print("  #############################################################")
+    print("  ###                                                       ###")
+    print("  ###   NO DEBISTE SCROLLEAR HASTA ACÁ ARRIBA.              ###")
+    print("  ###   DESCUBRISTE UN SECRETO DE LA PROGRAMACIÓN           ###")
+    print("  ###   Y AHORA VAS A TENER QUE PAGAR CARA TU CURIOSIDAD.   ###")
+    print("  ###                                                       ###")
+    print("  #############################################################")
+    print("  #############################################################")
+    print("\n"*500)
     print("   ___________ ___________ ___________ ")
     print("  |1          |2          |3          |")
     print("  |           |           |           |")
