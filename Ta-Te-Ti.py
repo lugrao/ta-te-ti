@@ -60,6 +60,7 @@ def elegir_casillero(jugador):
 
 
 def mostrar_tablero(casilleros):
+    print("\n"*100)
     print("   ___________ ___________ ___________ ")
     print("  |1          |2          |3          |")
     print("  |           |           |           |")
