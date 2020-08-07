@@ -67,7 +67,7 @@ def definir_jugadores():
     return print(f'\n  > El jugador 1 juega con "{jugador_1["Letra"]}" y el 2 con "{jugador_2["Letra"]}".\n\n  > Empieza el jugador 1.')
 
 
-def definir_jugador_activo():
+def cambiar_jugador_activo():
     global jugador_activo
     if jugador_activo["Número"] == 1:
         jugador_activo = jugador_2
@@ -164,6 +164,8 @@ def jugar_de_nuevo():
 
     if respuesta == "n":
         jugando = False
+        limpiar_pantalla()
+        print(gardel)
         print("\n  > Ha sido un honor tenerlos como jugadores, lo digo con honestidad.\n")
 
     return jugando
@@ -199,4 +201,4 @@ while jugando:
         else:
             limpiar_tablero()
             continue
-    definir_jugador_activo()
+    cambiar_jugador_activo()
