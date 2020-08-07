@@ -5,8 +5,6 @@ jugadores_definidos = False
 jugando = True
 casilleros = {"1": " ", "2": " ", "3": " ", "4": " ",
               "5": " ", "6": " ", "7": " ", "8": " ", "9": " ", }
-jugadas_ganadoras = [["1", "2", "3"], ["4", "5", "6"], ["7", "8", "9"], [
-    "1", "4", "7"], ["2", "5", "8"], ["3", "6", "9"], ["1", "5", "9"], ["3", "5", "7"]]
 
 
 def definir_jugadores():
@@ -97,6 +95,8 @@ def limpiar_tablero():
 
 
 def chequear_ganador(jugador):
+    jugadas_ganadoras = [["1", "2", "3"], ["4", "5", "6"], ["7", "8", "9"], [
+        "1", "4", "7"], ["2", "5", "8"], ["3", "6", "9"], ["1", "5", "9"], ["3", "5", "7"]]
     for jugada in jugadas_ganadoras:
         ganador = True
         for casillero in jugada:
