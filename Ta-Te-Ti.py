@@ -5,8 +5,6 @@ jugadores_definidos = False
 jugando = True
 casilleros = {"1": " ", "2": " ", "3": " ", "4": " ",
               "5": " ", "6": " ", "7": " ", "8": " ", "9": " ", }
-tablero_vacio = {"1": " ", "2": " ", "3": " ", "4": " ",
-                 "5": " ", "6": " ", "7": " ", "8": " ", "9": " ", }
 jugadas_ganadoras = [["1", "2", "3"], ["4", "5", "6"], ["7", "8", "9"], [
     "1", "4", "7"], ["2", "5", "8"], ["3", "6", "9"], ["1", "5", "9"], ["3", "5", "7"]]
 
@@ -82,6 +80,12 @@ def mostrar_tablero(casilleros):
     print("  |___________|___________|___________|")
 
 
+def limpiar_tablero():
+    global casilleros
+    casilleros = {"1": " ", "2": " ", "3": " ", "4": " ",
+                  "5": " ", "6": " ", "7": " ", "8": " ", "9": " ", }
+
+
 def chequear_ganador(jugador):
     for jugada in jugadas_ganadoras:
         ganador = True
@@ -137,6 +141,6 @@ while jugando:
         if not jugar_de_nuevo():
             break
         else:
-            casilleros = tablero_vacio
+            limpiar_tablero()
             continue
     definir_jugador_activo()
