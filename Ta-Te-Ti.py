@@ -3,8 +3,47 @@ jugador_2 = {"Número": 2, "Letra": " "}
 jugador_activo = {}
 jugadores_definidos = False
 jugando = True
+primera_partida = True
 casilleros = {"1": " ", "2": " ", "3": " ", "4": " ",
               "5": " ", "6": " ", "7": " ", "8": " ", "9": " ", }
+peron_y_evita = """
+              ...:::,.-                               
+         ,|yKQ@@@QOewwXf|~                            
+       ~a@@@@@@@o-       -                            
+      j@@@@@@@@Q-             >o(a|^.-                
+     |@@@@@@@@@@?              I@@@@&D: -             
+    .Q@@@@@@@@@@I               ;Q@QG.                
+    |@@@@@@@@@@@@F      ;SKN&Rf- :8Qa                 
+    ?@@@@@@@@@@@$       3iclW@Q :P@@@w*.              
+    ,Q@&aZ1;*hQQi       -- ,Z1.   *@@@@@x             
+     j@^r-*r,  - -            .    I@@@@@R;,,a;       
+     ~@+  dQf    --        -rmc:...,Q@@aIQQmjQk-      
+      qQ| ,-:            ,f@f-=k@@@@@@D. -?SIh;^      
+      z@@O+   - - ,      ;QQ::;7w9@@@@@g:     ,^|-    
+      l@@@@gjy&OQdQy;     =jM9AZFd@@@@@@&?   -yOwG;   
+      ;@8O@@@@@@@@@@@&MZvl    -,^.Q@@@@@@o~-   .-     
+       vi-cR@@@@@@@@@@@@@Q^    ,- A@@@@Qm,; ^qdx?,    
+     ,R&+   >Q@@@@@@@@@@@@@g},-   :@@@@&APQ->NQQ^     
+    ^Q@@@Q|-   :h@@@@@@@@@@@@@@Qmff@@@@@@@@*   -,     
+    Q@@@@@@Q;   jD@@@@@@@@@@@@@@@@@@@@@@@@@Q-  -,     
+    @@@@@@@@@a,   l@@@@@@@@@@@@@@@@@@@@@@@@@R?-       
+    @@@@@@@@@@@Z.  -^d@@@&Q@@@@@@@@@@DQ@@@@@R9{.      
+    @@@@@@@@@@@@Q>    |NQ:D@@qQ@@QI3i,;afI^.          
+    @@@@@@@@@@@@@@I    .| y@@NFc|}Q@Z  -              
+    @@@@@@@@@@@@@@@d:  =@QiQ@@@@Ra=d@U|:              
+    @@@@@@@@@@@@@@@@Q::Q@@QI@@@@@@@omZDa+             
+"""
+
+
+def dar_la_bienvenida():
+    limpiar_pantalla()
+    global primera_partida
+    print(peron_y_evita)
+    print(
+        "\n  > Bienvenidos al Ta-Te-Ti, un juego creado el 5 de junio de 1946 por el General Juan Domingo Perón para divertimento del pueblo argentino.\n")
+    primera_partida = False
+    if input("  > Presioná Enter para continuar."):
+        return
 
 
 def definir_jugadores():
@@ -56,17 +95,7 @@ def elegir_casillero(jugador):
 
 
 def mostrar_tablero(casilleros):
-    print("\n")
-    print("  #############################################################")
-    print("  #############################################################")
-    print("  ###                                                       ###")
-    print("  ###   NO DEBISTE SCROLLEAR HASTA ACÁ ARRIBA.              ###")
-    print("  ###   DESCUBRISTE UN SECRETO DE LA PROGRAMACIÓN           ###")
-    print("  ###   Y AHORA VAS A TENER QUE PAGAR CARA TU CURIOSIDAD.   ###")
-    print("  ###                                                       ###")
-    print("  #############################################################")
-    print("  #############################################################")
-    print("\n"*500)
+    limpiar_pantalla()
     print("   ___________ ___________ ___________ ")
     print("  |1          |2          |3          |")
     print("  |           |           |           |")
@@ -141,15 +170,27 @@ def jugar_de_nuevo():
     return jugando
 
 
-bienvenida = True
-while jugando:
-    if not jugadores_definidos:
+def limpiar_pantalla():
+    print("\n")
+    print("""
+  #############################################################
+  #############################################################
+  ###                                                       ###
+  ###   NO DEBISTE SCROLLEAR HASTA ACÁ ARRIBA.              ###
+  ###   DESCUBRISTE UN SECRETO DE LA PROGRAMACIÓN           ###
+  ###   Y AHORA VAS A TENER QUE PAGAR CARA TU CURIOSIDAD.   ###
+  ###                                                       ###
+  #############################################################
+  #############################################################
+  """)
+    print("\n"*500)
 
+
+while jugando:
+    if primera_partida:
+        dar_la_bienvenida()
+    if not jugadores_definidos:
         mostrar_tablero(casilleros)
-        if bienvenida:
-            print(
-                "\n  > Bienvenidos al Ta-Te-Ti, un juego creado el 5 de junio de 1946 por el General Juan Domingo Perón para divertimento del pueblo argentino.\n")
-            bienvenida = False
         definir_jugadores()
     elegir_casillero(jugador_activo)
     mostrar_tablero(casilleros)
