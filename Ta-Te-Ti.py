@@ -148,7 +148,7 @@ while jugando:
         mostrar_tablero(casilleros)
         if bienvenida:
             print(
-                "\n  > Bienvenidos al Ta-Te-Ti, un juego creado el 5 de junio de 1946 por el General Juan Domingo Perón para el divertimento del pueblo argentino.\n")
+                "\n  > Bienvenidos al Ta-Te-Ti, un juego creado el 5 de junio de 1946 por el General Juan Domingo Perón para divertimento del pueblo argentino.\n")
             bienvenida = False
         definir_jugadores()
     elegir_casillero(jugador_activo)
