@@ -96,25 +96,24 @@ def elegir_casillero(jugador):
 
 def mostrar_tablero(casilleros):
     limpiar_pantalla()
-    print("   ___________ ___________ ___________ ")
-    print("  |1          |2          |3          |")
-    print("  |           |           |           |")
-    print(
-        f"  |     {casilleros['1']}     |     {casilleros['2']}     |     {casilleros['3']}     |")
-    print("  |           |           |           |")
-    print("  |___________|___________|___________|")
-    print("  |4          |5          |6          |")
-    print("  |           |           |           |")
-    print(
-        f"  |     {casilleros['4']}     |     {casilleros['5']}     |     {casilleros['6']}     |")
-    print("  |           |           |           |")
-    print("  |___________|___________|___________|")
-    print("  |7          |8          |9          |")
-    print("  |           |           |           |")
-    print(
-        f"  |     {casilleros['7']}     |     {casilleros['8']}     |     {casilleros['9']}     |")
-    print("  |           |           |           |")
-    print("  |___________|___________|___________|")
+    print(f"""
+   ___________ ___________ ___________ 
+  |1          |2          |3          |
+  |           |           |           |
+  |     {casilleros['1']}     |     {casilleros['2']}     |     {casilleros['3']}     |
+  |           |           |           |
+  |___________|___________|___________|
+  |4          |5          |6          |
+  |           |           |           |
+  |     {casilleros['4']}     |     {casilleros['5']}     |     {casilleros['6']}     |
+  |           |           |           |
+  |___________|___________|___________|
+  |7          |8          |9          |
+  |           |           |           |
+  |     {casilleros['7']}     |     {casilleros['8']}     |     {casilleros['9']}     |
+  |           |           |           |
+  |___________|___________|___________|
+    """)
 
 
 def limpiar_tablero():
