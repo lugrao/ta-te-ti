@@ -1,6 +1,6 @@
-"""
+'''
 Un ta-te-ti con ciertas cosas de Gardel.
-"""
+'''
 
 JUGADOR_1 = {"Número": 1, "Letra": " "}
 JUGADOR_2 = {"Número": 2, "Letra": " "}
@@ -40,17 +40,25 @@ GARDEL = """
 
 
 def dar_la_bienvenida():
+    '''
+    Da la bienvenida a los jugadores y muestra a Carlos Gardel.
+    '''
     limpiar_pantalla()
     global PRIMERA_PARTIDA
     print(GARDEL)
     print(
-        "\n  > Bienvenidos al Ta-Te-Ti, un juego tan argentino como Carlos GARDEL —de quien se afirma que en realidad era uruguayo o francés—.\n")
+        "\n  > Bienvenidos al Ta-Te-Ti, un juego tan argentino como "
+        "Carlos GARDEL —de quien se afirma que en realidad era uruguayo o francés—.\n")
     PRIMERA_PARTIDA = False
     if input("  > Presioná Enter para continuar."):
         return
 
 
 def definir_jugadores():
+    '''
+    Define con qué letra jugará cada jugador.
+    Admite sólo "x", "X", "o" y "O".
+    '''
     global JUGADOR_1
     global JUGADOR_2
     global JUGADORES_DEFINIDOS
@@ -68,10 +76,14 @@ def definir_jugadores():
         else:
             print('\n  > No entendí. Por favor, ingresá "X" o "O".')
     JUGADOR_ACTIVO = JUGADOR_1
-    return print(f'\n  > El jugador 1 juega con "{JUGADOR_1["Letra"]}" y el 2 con "{JUGADOR_2["Letra"]}".\n\n  > Empieza el jugador 1.')
+    return print(f'\n  > El jugador 1 juega con "{JUGADOR_1["Letra"]}"'
+                 ' y el 2 con "{JUGADOR_2["Letra"]}".\n\n  > Empieza el jugador 1.')
 
 
 def cambiar_jugador_activo():
+    '''
+    Cambia el turno del jugador.
+    '''
     global JUGADOR_ACTIVO
     if JUGADOR_ACTIVO["Número"] == 1:
         JUGADOR_ACTIVO = JUGADOR_2
@@ -80,6 +92,11 @@ def cambiar_jugador_activo():
 
 
 def elegir_casillero(jugador):
+    '''
+    Asigna al casillero elegido la letra del jugador.
+    Se asegura de que el input del usuario se pueda convertir a integer.
+    Chequea si el casillero ya está ocupado y, si está ocupado, pide al usuario que elija otro.
+    '''
     eleccion = ""
     while not eleccion.isdigit():
         eleccion = input(
@@ -98,6 +115,10 @@ def elegir_casillero(jugador):
 
 
 def mostrar_tablero(casilleros):
+    '''
+    Limpia la pantalla.
+    Muestra el tablero con las posiciones actuales.
+    '''
     limpiar_pantalla()
     print(f"""
    ___________ ___________ ___________ 
@@ -120,12 +141,19 @@ def mostrar_tablero(casilleros):
 
 
 def limpiar_tablero():
+    '''
+    Llena el tablero de espacios en blanco en lugar de letras.
+    '''
     global CASILLEROS
     CASILLEROS = {"1": " ", "2": " ", "3": " ", "4": " ",
                   "5": " ", "6": " ", "7": " ", "8": " ", "9": " ", }
 
 
 def chequear_ganador(jugador):
+    '''
+    Chequea si la última jugada es una jugada ganadora.
+    Chequea si hay un empate.
+    '''
     jugadas_ganadoras = [["1", "2", "3"], ["4", "5", "6"], ["7", "8", "9"], [
         "1", "4", "7"], ["2", "5", "8"], ["3", "6", "9"], ["1", "5", "9"], ["3", "5", "7"]]
     for jugada in jugadas_ganadoras:
@@ -145,6 +173,9 @@ def chequear_ganador(jugador):
 
 
 def chequear_empate():
+    '''
+    Chequea si el tablero tiene todas las posiciones ocupadas.
+    '''
     for casillero in CASILLEROS:
         if CASILLEROS[casillero] == " ":
             return False
@@ -152,6 +183,10 @@ def chequear_empate():
 
 
 def jugar_de_nuevo():
+    '''
+    Pregunta a los jugadores si quieren jugar de nuevo.
+    Si no quieren, se despide.
+    '''
     global JUGANDO
     global JUGADORES_DEFINIDOS
     respuestas_admitidas = ["s", "n"]
@@ -175,6 +210,9 @@ def jugar_de_nuevo():
 
 
 def limpiar_pantalla():
+    '''
+    Imprime nuevas líneas para limpiar la pantalla.
+    '''
     print("\n")
     print("""
   #############################################################
