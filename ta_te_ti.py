@@ -164,7 +164,8 @@ def chequear_ganador(jugador):
                 break
         if ganador:
             print(
-                f'\n  > No me queda más que felicitar al jugador {jugador["Número"]} por haber conseguido la victoria.')
+                f'\n  > No me queda más que felicitar al jugador {jugador["Número"]}'
+                ' por haber conseguido la victoria.')
             return True
     if chequear_empate():
         print("\n  > Tenemos un desabrido empate.")
@@ -194,7 +195,8 @@ def jugar_de_nuevo():
 
     while respuesta not in respuestas_admitidas:
         respuesta = input(
-            '\n  > No entendí. Por favor, ingresen "S" si quieren jugar de nuevo o "N" si no quieren: ').lower()
+            '\n  > No entendí. Por favor, ingresen "S" si quieren jugar de nuevo'
+            ' o "N" si no quieren: ').lower()
 
     if respuesta == "s":
         JUGANDO = True
