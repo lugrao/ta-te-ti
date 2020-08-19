@@ -44,51 +44,36 @@ def dar_la_bienvenida():
     Da la bienvenida a los jugadores y muestra a Carlos Gardel.
     '''
     limpiar_pantalla()
-    global PRIMERA_PARTIDA
     print(GARDEL)
     print(
         "\n  > Bienvenidos al Ta-Te-Ti, un juego tan argentino como "
         "Carlos GARDEL —de quien se afirma que en realidad era uruguayo o francés—.\n")
-    PRIMERA_PARTIDA = False
     if input("  > Presioná Enter para continuar."):
         return
 
 
 def definir_jugadores():
     '''
-    Define con qué letra jugará cada jugador.
-    Admite sólo "x", "X", "o" y "O".
+    Pide a Jugador 1 que ingrese "X" o "O".
+    Devuelve tuple de dos elementos.
+    El elemento [0] es la letra del Jugador 1; el [1], la del Jugador 2.
     '''
-    global JUGADOR_1
-    global JUGADOR_2
-    global JUGADORES_DEFINIDOS
-    global JUGADOR_ACTIVO
-    while not JUGADORES_DEFINIDOS:
+    while True:
         input_j_1 = input('\n  > Jugador 1, ¿querés ser "X" o "O"?: ').lower()
         if input_j_1 == "x":
-            JUGADOR_1["Letra"] = "X"
-            JUGADOR_2["Letra"] = "O"
-            JUGADORES_DEFINIDOS = True
-        elif input_j_1 == "o":
-            JUGADOR_1["Letra"] = "O"
-            JUGADOR_2["Letra"] = "X"
-            JUGADORES_DEFINIDOS = True
-        else:
-            print('\n  > No entendí. Por favor, ingresá "X" o "O".')
-    JUGADOR_ACTIVO = JUGADOR_1
-    return print(f'\n  > El jugador 1 juega con "{JUGADOR_1["Letra"]}"'
-                 ' y el 2 con "{JUGADOR_2["Letra"]}".\n\n  > Empieza el jugador 1.')
+            return ("X", "O")
+        if input_j_1 == "o":
+            return ("O", "X")
+        print('\n  > No entendí. Por favor, ingresá "X" o "O".')
 
 
 def cambiar_jugador_activo():
     '''
-    Cambia el turno del jugador.
+    Se fija cuál es el jugador activo y devuelve la variable asociada al otro jugador.
     '''
-    global JUGADOR_ACTIVO
     if JUGADOR_ACTIVO["Número"] == 1:
-        JUGADOR_ACTIVO = JUGADOR_2
-    else:
-        JUGADOR_ACTIVO = JUGADOR_1
+        return JUGADOR_2
+    return JUGADOR_1
 
 
 def elegir_casillero(jugador):
@@ -140,18 +125,17 @@ def mostrar_tablero(casilleros):
     """)
 
 
-def limpiar_tablero():
+def vaciar_casilleros():
     '''
-    Llena el tablero de espacios en blanco en lugar de letras.
+    Devuelve un dictionary de casilleros vacíos.
     '''
-    global CASILLEROS
-    CASILLEROS = {"1": " ", "2": " ", "3": " ", "4": " ",
-                  "5": " ", "6": " ", "7": " ", "8": " ", "9": " ", }
+    return {"1": " ", "2": " ", "3": " ", "4": " ",
+            "5": " ", "6": " ", "7": " ", "8": " ", "9": " ", }
 
 
-def chequear_ganador(jugador):
+def chequear_ganador_o_empate(jugador):
     '''
-    Chequea si la última jugada es una jugada ganadora.
+    Chequea si la jugada es una jugada ganadora.
     Chequea si hay un empate.
     '''
     jugadas_ganadoras = [["1", "2", "3"], ["4", "5", "6"], ["7", "8", "9"], [
@@ -188,8 +172,6 @@ def jugar_de_nuevo():
     Pregunta a los jugadores si quieren jugar de nuevo.
     Si no quieren, se despide.
     '''
-    global JUGANDO
-    global JUGADORES_DEFINIDOS
     respuestas_admitidas = ["s", "n"]
     respuesta = input("\n  > ¿Quieren jugar de nuevo? S/N: ").lower()
 
@@ -199,16 +181,13 @@ def jugar_de_nuevo():
             ' o "N" si no quieren: ').lower()
 
     if respuesta == "s":
-        JUGANDO = True
-        JUGADORES_DEFINIDOS = False
+        return True
 
     if respuesta == "n":
-        JUGANDO = False
         limpiar_pantalla()
         print(GARDEL)
         print("\n  > Ha sido un honor tenerlos como jugadores, lo digo con honestidad.\n")
-
-    return JUGANDO
+        return False
 
 
 def limpiar_pantalla():
@@ -233,14 +212,22 @@ def limpiar_pantalla():
 while JUGANDO:
     if PRIMERA_PARTIDA:
         dar_la_bienvenida()
+        PRIMERA_PARTIDA = False
     if not JUGADORES_DEFINIDOS:
         mostrar_tablero(CASILLEROS)
-        definir_jugadores()
+        JUGADOR_1["Letra"], JUGADOR_2["Letra"] = definir_jugadores()
+        JUGADORES_DEFINIDOS = True
+        JUGADOR_ACTIVO = JUGADOR_1
+        print(
+            f'\n  > El jugador 1 juega con "{JUGADOR_1["Letra"]}"'
+            f' y el jugador 2 con "{JUGADOR_2["Letra"]}"')
     elegir_casillero(JUGADOR_ACTIVO)
     mostrar_tablero(CASILLEROS)
-    if chequear_ganador(JUGADOR_ACTIVO):
+    if chequear_ganador_o_empate(JUGADOR_ACTIVO):
         if not jugar_de_nuevo():
+            JUGANDO = False
             break
-        limpiar_tablero()
+        JUGADORES_DEFINIDOS = False
+        CASILLEROS = vaciar_casilleros()
         continue
-    cambiar_jugador_activo()
+    JUGADOR_ACTIVO = cambiar_jugador_activo()
